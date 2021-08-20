@@ -5,7 +5,7 @@ with open('README.md', 'r', encoding='utf-8') as file:
 
 setuptools.setup(
     name='image-shuffler',
-    version='1.0.0',
+    version='1.0.1',
     author='Gabriel Stork',
     author_email='storkdeveloper@gmail.com',
     description='Split an image into n-pieces and shuffle it.',
