@@ -6,11 +6,11 @@ import numpy as np
 
 class Shuffler:
     def __init__(self, image_path: str) -> None:
-        self.image = cv.imread(image_path)
+        self.original = cv.imread(image_path)
+        self.shuffled = self.original.copy()
 
-        self.status = 'Original'
-        self.x = self.image.shape[1]
-        self.y = self.image.shape[0]
+        self.x = self.original.shape[1]
+        self.y = self.original.shape[0]
 
         self._pieces = []
 
@@ -27,18 +27,20 @@ class Shuffler:
             )
 
     def _split(self, x: int, y: int, x_list: list, y_list: list) -> None:
+        if len(self._pieces) > 0:
+            self._pieces.clear()
+
         for x_n, x_piece in enumerate(x_list):
             for y_n, y_piece in enumerate(y_list):
                 self._pieces.append(
-                    self.image[y_n * y:y_piece, x_n * x:x_piece]
+                    self.original[y_n * y:y_piece, x_n * x:x_piece]
                 )
 
     def _generate_image(self, cols: int) -> None:
         chunks = [
             np.vstack(chunk) for chunk in zip(*[iter(self._pieces)] * cols)
         ]
-        self.image = np.hstack(np.array(chunks, dtype=np.uint8))
-        self.status = 'Shuffled'
+        self.shuffled = np.hstack(np.array(chunks, dtype=np.uint8))
 
     def shuffle(self, matrix: tuple) -> None:
         x = int(self.x / matrix[0])
@@ -56,9 +58,9 @@ class Shuffler:
         self._generate_image(matrix[1])
 
     def show(self) -> None:
-        cv.imshow(self.status, self.image)
+        cv.imshow('Image', self.shuffled)
         cv.waitKey(0)
         cv.destroyAllWindows()
 
     def save(self, path: str) -> None:
-        cv.imwrite(path, self.image)
+        cv.imwrite(path, self.shuffled)
