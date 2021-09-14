@@ -5,8 +5,8 @@ import numpy as np
 
 
 class Shuffler:
-    def __init__(self, image_path: str) -> None:
-        self.original = cv.imread(image_path)
+    def __init__(self, image: str) -> None:
+        self.original = cv.imread(image)
         self.shuffled = self.original.copy()
 
         self.x = self.original.shape[1]
@@ -23,7 +23,7 @@ class Shuffler:
                 'Splitting images into non-integer intervals causes pixel '
                 f'loss. Original Shape: ({self.x}, {self.y}) New Shape: '
                 f'({new_x}, {new_y})',
-                stacklevel=2
+                stacklevel=2,
             )
 
     def _split(self, x: int, y: int, x_list: list, y_list: list) -> None:
