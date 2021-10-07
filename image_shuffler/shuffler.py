@@ -14,6 +14,16 @@ class Shuffler:
 
         self._pieces = []
 
+    def _check_argument(self, matrix: tuple) -> None:
+        if len(matrix) != 2 or not all(isinstance(x, int) for x in matrix):
+            raise ValueError(
+                'matrix must be 2-dimensional containing only integer numbers'
+            )
+        elif min(matrix) <= 0:
+            raise ValueError('matrix values must be greater than 0')
+        elif matrix > (self.x, self.y):
+            raise ValueError('number of splits greater than pixels') 
+
     def _check_pixel_loss(self, x_missing: int, y_missing: int) -> None:
         new_x = self.x - x_missing
         new_y = self.y - y_missing
@@ -43,6 +53,8 @@ class Shuffler:
         self.shuffled = np.hstack(np.array(chunks, dtype=np.uint8))
 
     def shuffle(self, matrix: tuple) -> None:
+        self._check_argument(matrix)
+
         x = int(self.x / matrix[0])
         x_missing = self.x - (x * matrix[0])
         x_list = list(range(x, self.x + 1, x))
