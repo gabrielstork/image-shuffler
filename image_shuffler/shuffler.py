@@ -7,8 +7,11 @@ import numpy as np
 class Shuffler:
     def __init__(self, image: str) -> None:
         self.original = cv.imread(image)
-        self.shuffled = self.original.copy()
 
+        if self.original is None:
+            raise ValueError('image is None')
+        
+        self.shuffled = self.original.copy()
         self.x = self.original.shape[1]
         self.y = self.original.shape[0]
 
