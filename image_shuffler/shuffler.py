@@ -1,12 +1,14 @@
 import random
 import warnings
+import pathlib
 import cv2 as cv
 import numpy as np
 
 
 class Shuffler:
     def __init__(self, image: str) -> None:
-        self.original = cv.imread(image)
+        self.path = pathlib.Path(image)
+        self.original = cv.imread(str(self.path.resolve()))
 
         if self.original is None:
             raise ValueError('image is None')
@@ -77,5 +79,8 @@ class Shuffler:
         cv.waitKey(0)
         cv.destroyAllWindows()
 
-    def save(self, path: str) -> None:
-        cv.imwrite(path, self.shuffled)
+    def save(self) -> None:
+        cv.imwrite(
+            str(self.path.parent.resolve() / f'shuffled_{self.path.name}'),
+            self.shuffled,
+        )
