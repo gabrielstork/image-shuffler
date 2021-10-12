@@ -24,23 +24,36 @@ cd image-shuffler
 pip install -r requirements.txt
 ```
 
-## Example
+## How to use
+
+First you need to import the `Shuffler` class.
 
 ```python
 from image_shuffler import Shuffler
 ```
 
+Then, instantiate it passing a valid path of an image as its argument.
+
 ```python
 image = Shuffler('lenna.png')
+```
 
-# Splitting the image into 16 pieces, and shuffling it.
-image.shuffle((4, 4))
+Now to actually shuffle it, you need to use `shuffle()` method. The matrix defines the number of pieces that will be in `x` and `y`, in this case, there will be a total of 16 shuffled pieces (you can see it in the image on the top of this file).
 
-# Seeing the image.
+```python
+image.shuffle(matrix=(4, 4))
+```
+
+You can take a look at the image, using this method a new window will pop up.
+
+```python
 image.show()
+```
 
-# Saving the image.
-image.save('lenna_shuffled.png')
+No arguments are needed to save the image. It will be saved in the same place and, in this case, with `shuffled_lena.png` as its name.
+
+```python
+image.save()
 ```
 
 [![forthebadge](https://forthebadge.com/images/badges/made-with-python.svg)](https://github.com/gabrielstork)
