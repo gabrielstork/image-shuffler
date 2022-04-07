@@ -1,6 +1,6 @@
 # image-shuffler
 
-Split an image into n-pieces and shuffle it.
+Split an image into n-pieces and shuffle them.
 
 ![Comparison](https://raw.githubusercontent.com/gabrielstork/image-shuffler/main/images/comparison.png)
 
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 
 ## How to use
 
-First you need to import the `Shuffler` class.
+First, you need to import the `Shuffler` class.
 
 ```python
 from image_shuffler import Shuffler
@@ -38,19 +38,19 @@ Then, instantiate it passing a valid path of an image as its argument.
 image = Shuffler('lenna.png')
 ```
 
-Now to actually shuffle it, you need to use `shuffle()` method. The matrix defines the number of pieces that will be in `x` and `y`, in this case, there will be a total of 16 shuffled pieces (you can see it in the image on the top of this file).
+Now, to actually shuffle, you need to use the `shuffle()` method. The `matrix` parameter defines the number of pieces that will be in `x` and `y`, in this case, there will be a total of 16 pieces (you can see it in the image on the top of this file).
 
 ```python
 image.shuffle(matrix=(4, 4))
 ```
 
-You can take a look at the image, using this method a new window will pop up.
+To take a look at the shuffled image, you can use the `show()` method (a new window will pop up).
 
 ```python
 image.show()
 ```
 
-No arguments are needed to save the image. It will be saved in the same place and, in this case, with `shuffled_lena.png` as its name.
+No arguments are needed to save the image. It will be saved in the same directory as the oringinal one and, in this case, with `shuffled_lena.png` as its name.
 
 ```python
 image.save()
